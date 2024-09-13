@@ -2,83 +2,152 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>User Login - Wolters Kluwer</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
-
     <style type="text/css">
-        body,td,th{
-            color: #000000;
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            margin: 0;
         }
 
-        body{
-            background-color: #F0F0F0;
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            background: #f3f2f2;
         }
 
-        .style1 {
-            font-family: arial;
+        h4 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #000;
+            opacity: .85;
+        }
+
+        label {
+            font-size: 12.5px;
+            color: #000;
+            opacity: .8;
+            font-weight: 400;
+        }
+
+        form {
+            padding: 40px 30px;
+            background: #fefefe;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 300px;
+        }
+
+        p {
+            line-height: 155%;
+            margin-bottom: 5px;
             font-size: 14px;
-            padding: 12px;
-            line-height: 25px;
-            border-radius: 4px;
-            text-decoration: none;
+            color: #000;
+            opacity: .65;
+            max-width: 200px;
         }
 
-        .style2 {
-            font-family: arial;
-            font-size: 17px;
-            padding: 12px;
-            line-height: 25px;
+        .login-button {
+            background-color: #4A90E2; /* Light blue color */
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
             border-radius: 4px;
-            text-decoration: none;
+            box-shadow: 0px 2px 6px -1px rgba(0,0,0,.13);
+        }
+
+        .login-button-grey {
+            background-color: #a9a9a9; /* Grey color */
+        }
+
+        input {
+            font-size: 16px;
+            padding: 20px 0px;
+            height: 56px;
+            border: none;
+            border-bottom: solid 1px rgba(0,0,0,.1);
+            background: #fff;
+            width: 280px;
+            box-sizing: border-box;
+            transition: all .3s linear;
+            color: #000;
+        }
+
+        .floating-label {
+            position: relative;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 56px;
+            width: 44px;
+            display: flex;
+        }
+
+        .session {
+            display: flex;
+            flex-direction: row;
+            margin: auto auto;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0px 2px 6px -1px rgba(0,0,0,.12);
+        }
+
+        .left {
+            width: 220px;
+            background-image: url(/Images/ace.jpg); /* Update to the correct path */
+            background-size: cover;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
         }
     </style>
-
-</head> <!-- Removed extra head tag -->
+</head>
 <body>
-<div class="container">
-    <table width="100%" height="100%" border="0" cellpadding="0" align="center">
-        <tr>
-            <td align="center" valign="middle">
-                <table class="table-bordered" width="350" border="0" cellpadding="3" cellspacing="3" bgcolor="#ffffff">
+<div class="session">
+    <div class="left"></div>
+    <form th:action="@{/login}" th:object="${user}" method="post" class="log-in">
+        <img src="/Images/logowolters.jpg" alt="Logo" class="logo" /> <!-- Update path -->
+        <h4>Welcome To Login Dashboard!<span></span></h4>
+        <p> Enter Your Wolters Kluwer credentials to access:</p>
 
-                    <!-- Form begins here, wrapping entire content -->
-                    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+        <div class="floating-label">
+            <input id="username" placeholder="Username" type="text" th:field="*{username}" autocomplete="off" />
+            <label for="username">Username</label>
+            <div class="icon">
+                <!-- Insert username SVG icon here -->
+            </div>
+        </div>
 
-                        <tr>
-                            <td height="25" colspan="2" align="left" valign="middle" bgcolor="#ffffff" class="style2">
-                                <div align="center">
-                                    <strong>User Login</strong>
-                                </div>
-                            </td>
-                        </tr>
+        <div class="floating-label">
+            <input id="password" placeholder="Password" type="password" th:field="*{password}" autocomplete="off" />
+            <label for="password">Password</label>
+            <div class="icon">
+                <!-- Insert password SVG icon here -->
+            </div>
+        </div>
 
-                        <tr>
-                            <td>Username</td>
-                            <td>
-                                <!-- Corrected input for 'username' -->
-                                <input type="text" th:field="*{username}" class="form-control" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td>
-                                <!-- Corrected input for 'password' -->
-                                <input type="password" th:field="*{password}" class="form-control" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <!-- Aligned the button properly and removed unnecessary align -->
-                                <button type="submit" class="btn btn-info">Login</button>
-                            </td>
-                        </tr>
-
-                    </form> <!-- Form ends here -->
-
-                </table>
-            </td>
-        </tr>
-    </table>
+        <button type="submit" class="login-button">Log in</button>
+    </form>
 </div>
 </body>
 </html>
